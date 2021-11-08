@@ -10,28 +10,33 @@ function jqReady() {
 
 };
 
-// divs with people's pictures
-  // do we hardcode them, or do we render them based on the data
-
-
-//define a function that does this ()
+// Function renders all the images from provided array's githubUsername profile picture
 function renderGuessWhoPanels(array){
+    //people [], for each render the following
   for (let i in array){
     let guessWhoPanel = `
-    <img src="https://github.com/${array[i].name}.png?size=250" alt="Profile image of ${array[i].githubUsername}" data-name="${array[i].name}"></img>
-  `;
+    <img src="https://github.com/${array[i].name}.png?size=250" alt="Profile image of ${array[i].githubUsername}" data-index="${i}"></img> 
+  `;     // meta data so we can identify when we click them ✅
 
-    // meta data so we can identify when we click them ✅
-
+  //Append each picture to the guessWhoDiv
   $('.guessWhoDiv').append(guessWhoPanel);
   }; // end for-in through array loop
 }; // end renderGuessWhoPanels
- //people [], for each render the following
-  
+
+// Function that is called when image is clicked!
 function imageClick() {
-  console.log('image clicked');
+  // $(this).data()
+  console.log($(this).data());
   
-}
+}; // end imageClick
+
+// Random Number Generator Function provided in README ✅
+function randomNumber(min, max){
+    return Math.floor(Math.random() * (1 + max - min) + min);
+}; // end randomNumber
+
+// This is the min and max of our people []
+console.log(randomNumber(0, (people.length - 1)));
 
 
 
