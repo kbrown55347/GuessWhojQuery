@@ -1,13 +1,8 @@
 $(document).ready(jqReady);
 
-console.log('Here are all the available people:', people);
-
 function jqReady() {
-  console.log('javascript and jquery loaded');  
-  console.log(people); // Properly accessing data.js!
   renderGuessWhoPanels(people);
-  $('img').on('click', imageClick);
-
+  $('.guessWhoDiv').on('click', 'img', handlePersonClick);
 };
 
 // Function renders all the images from provided array's githubUsername profile picture
@@ -15,7 +10,7 @@ function renderGuessWhoPanels(array){
     //people [], for each render the following
   for (let i in array){
     let guessWhoPanel = `
-    <img src="https://github.com/${array[i].name}.png?size=250" alt="Profile image of ${array[i].githubUsername}" data-index="${i}"></img> 
+    <img src="https://github.com/${array[i].githubUsername}.png?size=250" alt="Profile image of ${array[i].name}" data-name="${array[i].name}"></img>
   `;     // meta data so we can identify when we click them ✅
 
   //Append each picture to the guessWhoDiv
@@ -23,21 +18,21 @@ function renderGuessWhoPanels(array){
   }; // end for-in through array loop
 }; // end renderGuessWhoPanels
 
-// Function that is called when image is clicked!
-function imageClick() {
-  // $(this).data()
-  console.log($(this).data());
-  
-}; // end imageClick
+// Function that is called when image is clicked
+function handlePersonClick() {
+  let clickedPerson = $(this).data('name');
+  if (clickedPerson === 'Kelsey') {
+    alert('You found Kelsey!')
+  } else {
+    alert('That is not Kelsey. Try again.')
+  }
+}
 
 // Random Number Generator Function provided in README ✅
 function randomNumber(min, max){
-    return Math.floor(Math.random() * (1 + max - min) + min);
+  return Math.floor(Math.random() * (1 + max - min) + min);
 }; // end randomNumber
 
-// This is the min and max of our people []
-console.log(randomNumber(0, (people.length - 1)));
-
-
-
-
+// function pickRandomPerson(peopleList) {
+//     return peopleList[randomNumber((0, (people.length - 1)))].name;
+//   };
